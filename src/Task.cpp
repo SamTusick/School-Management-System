@@ -57,7 +57,8 @@ void addTask(std::vector<Task>& tasks)
         std::string taskDueDate;
 
         std::cout << "When is this task due? (xx/xx/xxxx)" << std::endl;
-        std::getline(std::cin, newTask.dueDate);
+        std::cin.ignore();
+        std::getline(std::cin, taskDueDate);
 
         newTask.dueDate = taskDueDate;
 
@@ -89,11 +90,26 @@ void changeStatus(std::vector<Task>& tasks)
 {
 
 }
-
+*/
 void viewTasks(std::vector<Task>& tasks)
 {
 
-}
-*/
+    if(tasks.empty())
+    {
+        std::cout << "There is no tasks!\n" << std::endl;
+    }
+    else
+    {
+        std::cout << "\n--------------------------------------Task List--------------------------------------\n";
 
+        for(int i = 0; i < tasks.size(); i++)
+            {
+                std::cout << i + 1 << ". " << tasks[i].type << " | "
+                << tasks[i].title << " | Due: " << tasks[i].dueDate << " | Status: "
+                << (tasks[i].status ? "Complete" : "Incomplete") << std::endl;
+            }
+
+        std::cout << "-------------------------------------------------------------------------------------\n";
+    }
+}
 
