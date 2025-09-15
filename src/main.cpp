@@ -41,7 +41,7 @@ int main()
                 break;
         case 5:
             //Call View Tasks Function
-                //viewTasks(tasks);
+                viewTasks(tasks);
                 break;
         case 6:
             std::cout << "Exiting Program..." << std::endl;
