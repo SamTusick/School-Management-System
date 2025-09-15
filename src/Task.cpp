@@ -7,15 +7,22 @@
 
 void addTask(std::vector<Task>& tasks)
 {
-    int tasktype = 0;
-    Task newTask;
+    char repeat = 'Y';
 
-    std::cout << "What is the type of your task?\n" << "1. Homework\n" <<
-        "2. Quiz\n" << "3. Exam\n" << "4. Other\n" << std::endl;
-    std::cin >> tasktype;
-
-    switch (tasktype)
+    while(repeat == 'Y' || repeat == 'y')
     {
+        Task newTask;
+
+        // Get Task type
+        int tasktype = 0;
+
+        std::cout << "What is the type of your task?\n" << "1. Homework\n" <<
+            "2. Quiz\n" << "3. Exam\n" << "4. Other\n" << std::endl;
+        std::cin >> tasktype;
+
+
+        switch (tasktype)
+        {
         case 1:
             newTask.type = "Homework";
             break;
@@ -32,14 +39,39 @@ void addTask(std::vector<Task>& tasks)
             newTask.type = "Other";
             break;
 
-    default:
-            std:: cout << "Invalid Task Type!" << std::endl;
+        default:
+            std:: cout << "Invalid Task Type!\n" << std::endl;
             break;
+        }
 
+        // Get Task tile
+        std::string taskTitle;
 
+        std::cout << "What is the task title?\n" << std::endl;
+        std::cin.ignore();
+        std::getline(std::cin, taskTitle);
+
+        newTask.title = taskTitle;
+
+        // Get Due Date
+        std::string taskDueDate;
+
+        std::cout << "When is this task due? (xx/xx/xxxx)" << std::endl;
+        std::getline(std::cin, newTask.dueDate);
+
+        newTask.dueDate = taskDueDate;
+
+        // Set completion
+        newTask.status = false;
+
+        // Save task
+        tasks.push_back(newTask);
+        std::cout << "You successfully added " << newTask.title << std::endl;
+
+        // Ask for repeat
+        std::cout << "Would you like to add another task? (Y/N)" << std::endl;
+        std::cin >> repeat;
     }
-
-
 }
 
 /*
