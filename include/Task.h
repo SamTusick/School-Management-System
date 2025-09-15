@@ -11,7 +11,7 @@
 
 struct Task
 {
-    int type;
+    std::string type;
     std::string title;
     std::string dueDate;
     bool status;
