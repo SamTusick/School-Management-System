@@ -29,11 +29,11 @@ int main()
                 break;
         case 2:
             //Call Remove Task Function
-                //deleteTask(tasks);
+                deleteTask(tasks);
                 break;
         case 3:
             //Call Update Task Function
-                //updateTask(tasks);
+                updateTask(tasks);
                 break;
         case 4:
             //Call Change Status Function
