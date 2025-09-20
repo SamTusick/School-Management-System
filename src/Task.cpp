@@ -200,12 +200,42 @@ void updateTask(std::vector<Task>& tasks)
 
 
 }
-/*
+
 void changeStatus(std::vector<Task>& tasks)
 {
+    int changeTaskChoice = 0;
 
+    std::cout << "Which task's status would you like to change?\n";
+    for (int i = 0; i < tasks.size(); i++)
+    {
+        std::cout << i + 1 << ". " << tasks[i].title << std::endl;
+    }
+
+    std::cin >> changeTaskChoice;
+    if (changeTaskChoice < 1 || changeTaskChoice > tasks.size())
+    {
+        std::cout << "Invalid Choice\n";
+        return;
+    }
+
+    int newStatus = 0;
+    std::cout << "Is this task:\n1. Complete\n2. Incomplete\n";
+    std::cin >> newStatus;
+
+    if (newStatus == 1)
+    {
+        tasks[changeTaskChoice - 1].status = true;
+    }
+    else if (newStatus == 2)
+    {
+        tasks[changeTaskChoice - 1].status = false;
+    }
+    else
+    {
+        std::cout << "Invalid Task Status!\n";
+    }
 }
-*/
+
 void viewTasks(std::vector<Task>& tasks)
 {
 

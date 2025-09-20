@@ -37,7 +37,7 @@ int main()
                 break;
         case 4:
             //Call Change Status Function
-                //changeStatus(tasks);
+                changeStatus(tasks);
                 break;
         case 5:
             //Call View Tasks Function
