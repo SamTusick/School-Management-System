@@ -78,6 +78,7 @@ void addTask(std::vector<Task>& tasks)
 
 void deleteTask(std::vector<Task>& tasks)
 {
+    // Check for empty vector
     if (tasks.size() == 0)
         {
             std::cout << "There is no task to delete!\n";
@@ -105,6 +106,7 @@ void deleteTask(std::vector<Task>& tasks)
 
 void updateTask(std::vector<Task>& tasks)
 {
+    // Check for empty vector
     if (tasks.size() == 0)
     {
         std::cout << "There is no task to update!\n";
