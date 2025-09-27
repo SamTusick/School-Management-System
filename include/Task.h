@@ -5,6 +5,7 @@
 #define TASK_H
 #include <vector>
 #include <string>
+#include "sqlite3.h"
 
 
 // Task definintion
@@ -20,10 +21,12 @@ struct Task
 
 //Functions Declarations
 
-void addTask(std::vector<Task>& tasks);
+void addTask(sqlite3* db, std::vector<Task>& tasks);
 void deleteTask(std::vector<Task>& tasks);
 void updateTask(std::vector<Task>& tasks);
 void changeStatus(std::vector<Task>& tasks);
 void viewTasks(std::vector<Task>& tasks);
+int callback(void* data, int argc, char** argv, char** azColName);
+void loadTasks(sqlite3* db, std::vector<Task>& tasks);
 
 #endif //TASK_H

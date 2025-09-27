@@ -275,3 +275,20 @@ void viewTasks(sqlite3* db, std::vector<Task>& tasks)
     }
 }
 
+int callback(void* data, int argc, char** argv, char** azColName) {
+    auto* tasks = static_cast<std::vector<Task>*>(data);
+    Task t;
+    t.type = argv[1] ? argv[1] : "";
+    t.title = argv[2] ? argv[2] : "";
+    t.dueDate = argv[3] ? argv[3] : "";
+    t.status = argv[4] && std::string(argv[4]) == "1";
+    tasks->push_back(t);
+    return 0;
+}
+
+void loadTasks(sqlite3* db, std::vector<Task>& tasks) {
+    const char* sql = "SELECT * FROM tasks;";
+    char* errMsg = 0;
+    sqlite3_exec(db, sql, callback, &tasks, &errMsg);
+}
+
