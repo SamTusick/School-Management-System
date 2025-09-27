@@ -21,7 +21,7 @@ int main()
         std::cout << "Opened database successfully!\n" << std::endl;
     }
 
-    // create table if not exists
+    //Create table if not exists
     const char* sql = "CREATE TABLE IF NOT EXISTS tasks ("
                       "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                       "type TEXT NOT NULL,"
