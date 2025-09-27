@@ -20,7 +20,7 @@ This project demonstrates database integration with `sqlite3` for persistence, a
 
 When you run the program, you can interact with the menu like this:
 
-![Example Task List](assests/exampleImage.png)
+![Example Task List](assests/example.png)
 
 ---
 
