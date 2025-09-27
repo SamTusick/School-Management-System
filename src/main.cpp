@@ -26,7 +26,7 @@ int main()
                       "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                       "type TEXT NOT NULL,"
                       "title TEXT NOT NULL,"
-                      "due_date TEXT,"
+                      "dueDate TEXT,"
                       "status INTEGER NOT NULL);";
     sqlite3_exec(db, sql, 0, 0, 0);
 
@@ -51,19 +51,19 @@ int main()
                 break;
         case 2:
             //Call Remove Task Function
-                deleteTask(tasks);
+                deleteTask(db, tasks);
                 break;
         case 3:
             //Call Update Task Function
-                updateTask(tasks);
+                updateTask(db, tasks);
                 break;
         case 4:
             //Call Change Status Function
-                changeStatus(tasks);
+                changeStatus(db, tasks);
                 break;
         case 5:
             //Call View Tasks Function
-                viewTasks(tasks);
+                viewTasks(db, tasks);
                 break;
         case 6:
             std::cout << "Exiting Program..." << std::endl;
