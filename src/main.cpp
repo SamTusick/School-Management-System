@@ -7,9 +7,29 @@
 #include <iostream>
 #include <vector>
 #include "../include/Task.h"
+#include "sqlite3.h"
 
 int main()
 {
+    sqlite3* db;
+    int rc = sqlite3_open("tasks.db", &db);
+
+    if (rc) {
+        std::cerr << "Can't open database: " << sqlite3_errmsg(db) << std::endl;
+        return 1;
+    } else {
+        std::cout << "Opened database successfully!\n" << std::endl;
+    }
+
+    // create table if not exists
+    const char* sql = "CREATE TABLE IF NOT EXISTS tasks ("
+                      "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                      "type TEXT NOT NULL,"
+                      "title TEXT NOT NULL,"
+                      "due_date TEXT,"
+                      "status INTEGER NOT NULL);";
+    sqlite3_exec(db, sql, 0, 0, 0);
+
     std::vector<Task> tasks;
     int taskChoice = 0;
 
@@ -54,6 +74,8 @@ int main()
 
     }while(taskChoice!=6);
 
+    std::cout << "Closing database..." << std::endl;
+    sqlite3_close(db);
     return 0;
 
 }
