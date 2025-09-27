@@ -4,8 +4,9 @@
 
 #include "../include/Task.h"
 #include <iostream>
+#include <sqlite3.h>
 
-void addTask(std::vector<Task>& tasks)
+void addTask(sqlite3* db, std::vector<Task>& tasks)
 {
     char repeat = 'Y';
 
@@ -69,14 +70,28 @@ void addTask(std::vector<Task>& tasks)
         tasks.push_back(newTask);
         std::cout << "You successfully added " << newTask.title << std::endl;
 
+        // Save to DB
+        std::string sql = "INSERT INTO tasks (type, title, due_date, status) VALUES ('" +
+                          newTask.type + "', '" + newTask.title + "', '" +
+                          newTask.dueDate + "', " + (newTask.status ? "1" : "0") + ");";
+
+        char* errMsg = 0;
+        int rc = sqlite3_exec(db, sql.c_str(), 0, 0, &errMsg);
+
+        if (rc != SQLITE_OK) {
+            std::cerr << "SQL error: " << errMsg << std::endl;
+            sqlite3_free(errMsg);
+        } else {
+            std::cout << "Task added to database successfully." << std::endl;
+        }
+
         // Ask for repeat
         std::cout << "Would you like to add another task? (Y/N)" << std::endl;
         std::cin >> repeat;
     }
 }
 
-
-void deleteTask(std::vector<Task>& tasks)
+void deleteTask(sqlite3* db, std::vector<Task>& tasks)
 {
     // Check for empty vector
     if (tasks.size() == 0)
@@ -104,7 +119,7 @@ void deleteTask(std::vector<Task>& tasks)
     tasks.erase(tasks.begin() + deleteChoice - 1);
 }
 
-void updateTask(std::vector<Task>& tasks)
+void updateTask(sqlite3* db, std::vector<Task>& tasks)
 {
     // Check for empty vector
     if (tasks.size() == 0)
@@ -203,7 +218,7 @@ void updateTask(std::vector<Task>& tasks)
 
 }
 
-void changeStatus(std::vector<Task>& tasks)
+void changeStatus(sqlite3* db, std::vector<Task>& tasks)
 {
     int changeTaskChoice = 0;
 
@@ -238,7 +253,7 @@ void changeStatus(std::vector<Task>& tasks)
     }
 }
 
-void viewTasks(std::vector<Task>& tasks)
+void viewTasks(sqlite3* db, std::vector<Task>& tasks)
 {
 
     if(tasks.empty())
