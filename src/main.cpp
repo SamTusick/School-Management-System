@@ -31,6 +31,8 @@ int main()
     sqlite3_exec(db, sql, 0, 0, 0);
 
     std::vector<Task> tasks;
+    loadTasks(db, tasks);
+
     int taskChoice = 0;
 
     do
@@ -45,7 +47,7 @@ int main()
         {
         case 1:
             //Call Add Task Function
-                addTask(tasks);
+                addTask(db, tasks);
                 break;
         case 2:
             //Call Remove Task Function
